@@ -25,3 +25,13 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+include
+lib
+local
+man
+share
+Scripts
+.Python
+*~
+*.db
