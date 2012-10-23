@@ -18,4 +18,3 @@ Computador Servidor
 Computador Cliente
 ------------------
 *TODO*
-

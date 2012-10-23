@@ -94,28 +94,6 @@ O pagamento é feito referente à dívida acumulada no balanço (mas sem a obrig
 
 Um pagamento deve ser vinculado a um e somente um balanço e um balanço pode ter vários pagamentos.
 
-Regras de negócios
-------------------
-Existem algumas regras que regem o funcionamento de sistema que não necessariamente são de responsabilidade do banco e são elas :
-
-- Somente produtos da categoria “composto” são composição de outros produtos;
-
-- Somente produtos da categoria aluguel possuem estoque;
-
-- Ao fazer pedido de um produto da categoria aluguel deve-se fazer a checagem de sua disponibilidade em estoque para aquele período através do cruzamento de todos os pedidos que tenham interseção de data de saída/retorno com o do pedido a ser feito, sendo vetada a realização de pedidos indisponíveis em estoque;
-
-- O produto composto funciona como um modelo, ao se fazer um pedido de produto composto deve se fazer a checagem de disponibilidade de todos produtos de aluguel que o compõem;
-
-- Um pedido é permitido se houver uma diferença mínima de 24h entre a data de saída e a data de realização do pedido;
-
-- Todo pedido concluído é submetido a aprovação do gerente do sistema;
-
-- O parceiro pode adicionar, alterar e remover pedidos e consultar o balanço;
-
-- Um pedido somete poderá ser alterado e removido por um parceiro com 24h de antecedência de sua data de saída;
-
-- O gerente do sistema pode manter produtos, pedidos, balanço, parceiros e pagamentos.
-
 **Observação Importante:** A visão do gerente do sistema não está inclusa na modelagem pois o framework é quem cuidará da abstração da administração garantindo o foco total na resolução do problema.
 
 Sentença de Posição do Produto
