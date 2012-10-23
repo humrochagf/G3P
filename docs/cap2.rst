@@ -2,7 +2,7 @@ Para a elaboração do aplicativo será necessário uma série de informações 
 
 Descrição do Problema
 =====================
-A loja quer implementar um sistema automatizado para gerenciar seus produtos e pedidos bem como interagir de forma mais dinâmica com seus parceiros oferecendo-os um meio onde possam fazer seus pedidos sem necessariamente estar em contato direto com algum encarregado da empresa. E para isso ela precisará armazenar uma série de dados.
+Uma loja de festas infantis quer implementar um sistema automatizado para gerenciar seus produtos e pedidos bem como interagir de forma mais dinâmica com seus parceiros oferecendo-os um meio onde possam fazer seus pedidos sem necessariamente estar em contato direto com algum encarregado da empresa. E para isso ela precisará armazenar uma série de dados.
 
 Produto
 -------
@@ -10,49 +10,49 @@ O produtos fornecidos pela loja possuem um série de características onde algum
 
 As características presentes em todo produto são:
 
-- Código (todo produto possui um código que o identifica );
+- Código para identificar;
 
 - Preço;
 
-- Categoria (todo produto ao ser criado deve se enquadrar em somente uma categoria pré definida e esta categoria pode se referir a vários produtos );
+- Categoria a qual o produto se enquadra ao ser criado, sendo ele enquadrado em somente uma que é pré definida e pode se referir a outros produtos. As categorias são 3, aluguel, venda e composto;
 
-- Tipo (todo produto deve possuir somente um tipo, podendo este possuir vários produtos ou não ).
+- Tipo do produto. Por exemplo se ele é um painel, uma vela, uma toalha, etc. Podem haver vários produtos de um mesmo tipo.
 
 As demais não são características de todo produto e são elas :
 
-- Tema (nem todo produto possui um tema, mas caso possua será somente um, tendo este tema a possibilidade de se referir a outros produtos );
+- Tema, onde nem todo produto o possui, mas caso possua será somente um, tendo este tema a possibilidade de se referir a outros produtos;
 
-- Cor (nem todo produto possui uma cor, mas caso possua será somente uma, tendo esta cor a possibilidade de se referir a outros produtos );
+- Cor, onde nem todo produto a possui, mas caso possua será somente uma, tendo esta cor a possibilidade de se referir a outros produtos;
 
-- Estoque (nem todo produto possui estoque, mas caso possua será somente um onde este determinado estoque se refere única e somente a este produto não tendo necessidade de armazená-lo em caso de exclusão deste produto).
+- Estoque que é uma característica de produtos da categoria aluguel.
 
-Existem determinados produtos que se encaixam em uma determinada categoria (nomeada de “composto” para se referir a produtos compostos ) que é um produto do qual é fruto de uma composição de outros produtos e possui sua própria instância. Este produto pode ser resultado da junção de vários produtos e um produto ligado a ele pode estar ligado a outro produto desta categoria.
+Existem determinados produtos que se encaixam em uma determinada categoria (categoria "composto") que é um produto do qual é fruto de uma composição de outros produtos e possui sua própria instância. Este produto pode ser resultado da junção de vários produtos e um produto ligado a ele pode estar ligado a outro produto desta categoria.
 
 Parceiro
 --------
 É o usuário do sistema e responsável por efetuar os pedidos. Sobre ele guarda-se:
 
-- E-mail (responsável por identificar o parceiro e exercerá a função de login no sistema );
+- E-mail do usuário responsável por identificar o parceiro e exercerá a função de login no sistema;
 
-- Nome (nome do parceiro);
+- Nome do parceiro;
 
 - Senha;
 
 - Endereço;
 
-- Telefone (Sendo este composto por numero e tipo, podendo o parceiro possuir mais de um, dês de que distintos, sendo ligados a obrigatoriamente um e somente um parceiro onde em caso de exclusão do mesmo não há necessidade de mantê-lo );
+- Telefone do parceiro, composto por numero e tipo, podendo o parceiro possuir mais de um, dês de que distintos, sendo ligados a obrigatoriamente um e somente um parceiro onde em caso de exclusão do mesmo não há necessidade de mantê-lo;
 
 Pedido
 ------
 É efetuado pelos parceiros sendo o responsável por intermediar o relacionamento deles com os produtos da loja. Sobre ele é guardado:
 
-- Código (que o identifica );
+- Código que o identifica;
 
 - Data de saída;
 
 - Data de retorno;
 
-- Status (que indica se o pedido foi aprovado ou não );
+- Status que indica se o pedido foi aprovado ou não;
 
 - Comentários.
 
@@ -62,11 +62,11 @@ Um produto pode estar em vários pedidos e um pedido pode conter vários produto
 
 Balanço e Pagamento
 -------------------
-O balanço é um fechamento feito todo mês para cada parceiro individualmente onde se pega todos os pedidos entregues daquele mês (dados como débito ) somados aos pagamentos realizados referentes àquele balanço (dados como crédito ) somados ao saldo anterior àquele balanço. Sobre ele guarda-se:
+O balanço é um fechamento feito todo mês para cada parceiro individualmente onde se pega todos os pedidos entregues daquele mês (dados como débito) somados aos pagamentos realizados referentes àquele balanço (dados como crédito) somados ao saldo anterior àquele balanço. Sobre ele guarda-se:
 
-- Código (que o identifica );
+- Código que o identifica;
 
-- Data (sempre referente ao primeiro dia do mês a que se refere );
+- Data sempre referente ao primeiro dia do mês a que se refere;
 
 - Saldo anterior.
 
@@ -74,23 +74,23 @@ Um balanço deve ser vinculado a um e somente um parceiro e um parceiro pode ter
 
 Um pedido pode ser vinculado a no máximo um balanço e um balanço pode ter vários pedidos.
 
-O pagamento é feito referente à dívida acumulada no balanço (mas sem a obrigatoriedade de saná-la com precisão, dando margem para acumular crédito ou débito para o balanço seguinte ) e pode ser feito em dinheiro, cheque ou débito em conta. Sobre ele guarda-se :
+O pagamento é feito referente à dívida acumulada no balanço (mas sem a obrigatoriedade de saná-la com precisão, dando margem para acumular crédito ou débito para o balanço seguinte) e pode ser feito em dinheiro, cheque ou débito em conta. Sobre ele guarda-se :
 
-- Código (que o identifica nos três casos de pagamento);
+- Código que o identifica;
 
-- Data/hora (momento em que o pagamento foi efetuado nos três casos de pagamento );
+- Data/hora em que o pagamento foi efetuado;
 
-- Valor (nos três casos de pagamento);
+- Valor;
 
-- Número do cheque (em caso de pagamento em cheque );
+- Número do cheque em caso de pagamento em cheque;
 
-- Número do depósito (em caso de débito em conta );
+- Número do depósito em caso de débito em conta;
 
-- Data do depósito (em caso de débito em conta );
+- Data do depósito em caso de débito em conta;
 
-- Banco (em caso de pagamento em cheque ou débito em conta );
+- Banco em caso de pagamento em cheque ou débito em conta;
 
-- Titular da conta (em caso de pagamento em cheque ou débito em conta ).
+- Titular da conta em caso de pagamento em cheque ou débito em conta.
 
 Um pagamento deve ser vinculado a um e somente um balanço e um balanço pode ter vários pagamentos.
 

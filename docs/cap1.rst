@@ -1,14 +1,14 @@
-Este trabalho descreve o projeto de criação de um aplicativo destinado a uma loja de festas infantis que trabalha com locação e venda de produtos de decoração para seus parceiros (a gestão de clientes não parceiros está fora do escopo deste projeto).
+Este trabalho descreve o projeto de criação de um aplicativo destinado a uma loja de festas infantis que trabalha com locação e venda de produtos de decoração para seus parceiros sendo que a gestão de clientes não parceiros está fora do escopo deste projeto.
 
 Este aplicativo tem como foco a gestão dos produtos, dos pedidos realizados por estes parceiros bem como o gerenciamento dos parceiros propriamente ditos. 
 
-O aplicativo será desenvolvido em linguagem de programação Python através de um framework web ligado a um banco de dados visando atender as especificações descritas neste trabalho.
+O aplicativo será desenvolvido em linguagem de programação Python através do Django web framework ligado a um banco de dados visando atender as especificações descritas neste trabalho.
 
 Motivação
 =========
-Tendo em vista o modelo de gestão atual da loja foram identificados os seguintes pontos críticos:
+Tendo em vista o modelo de gestão atual da loja foram identificados vários pontos críticos os quais motivaram o desenvolvimento deste trabalho sendo eles listados abaixo:
 
-- Os registros de pedidos são feitos de forma manual em quadros de pedidos e em cadernos (sendo um caderno para cada parceiro);
+- Os registros de pedidos são feitos de forma manual em quadros de pedidos e em cadernos sendo um caderno para cada parceiro;
 
 - Os pedidos são feitos pelos parceiros por e-mail onde a linguagem do e-mail é informal e varia de acordo com o parceiro (em alguns casos varia de acordo com cada funcionário do parceiro);
 
@@ -26,38 +26,48 @@ Com isso foram observados os seguintes problemas:
 
 - Não há um histórico confiável de pedidos e pagamentos realizados.
 
+Dada as condições atuais de gerenciamento da loja foi observado a grande necessidade de se criar um aplicativo que facilite todo este processo.
+
 Objetivos
 =========
 Os objetivos deste trabalho serão descritos a seguir.
 
 Geral
 -----
-Possuir um cadastro formal, centralizado, consistente e integrado dos produtos, pedidos e parceiros afim de reduzir a sobrecarga de gestão da loja.
+Esse trabalho tem como objetivo implementar um aplicativo que realize um cadastro formal, centralizado, consistente e integrado dos produtos, pedidos e parceiros afim de reduzir a sobrecarga de gestão da loja.
 
 Específicos
 -----------
-Seguem abaixo os objetivos específicos a serem alcançados:
+Descreve-se, abaixo, os objetivos específicos a serem alcançados:
 
-- Ter uma forma padronizada para a realização e/ou alteração dos pedidos pelos parceiros;
+- Padronizar a realização e/ou alteração dos pedidos pelos parceiros;
 
 - Facilitar o processo de gestão dos pedidos;
 
 - Automatizar a geração de relatórios e consultas sobre os produtos, pedidos e parceiros;
 
-- Ter controle da disponibilidade dos produtos;
+- Controlar da disponibilidade dos produtos;
 
-- Possuir um histórico de pedidos e pagamentos;
+- Gerar um histórico de pedidos e pagamentos;
 
-- Possuir uma interface amigável e de fácil compreensão.
+- Ter uma interface amigável e de fácil compreensão.
 
 Organização do Trabalho
 =======================
-Abaixo uma breve descrição de como o trabalho está organizado:
+Apresenta-se a seguir uma breve descrição de como o trabalho está organizado em 7 capítulos dispostos da seguinte forma:
 
-- Visão do sistema: descrição detalhada do problema e proposição de solução;
+1. Introdução: breve descrição do problema, motivação e objetivos a serem alcançados com a solução;
 
-- Pesquisa e Métodos: definição das tecnologias utilizadas na solução;
+2. Visão do sistema: descrição detalhada do problema e proposição de solução;
 
-- Elaboração da Solução: descrição detalhada do processo de resolução do problema;
+3. Pesquisa e Métodos: definição das tecnologias utilizadas na solução;
 
-- Conclusão.
+4. Elaboração da Solução: descrição detalhada do processo de resolução do problema;
+
+5. Conclusão;
+
+6. Referências Bibliográficas;
+
+7. Apêndice;
+
+8. Anexos.
