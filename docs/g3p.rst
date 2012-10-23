@@ -24,11 +24,24 @@ Este trabalho busca a criação de um produto personalizado e simplificado para 
 **********
 Introdução
 **********
-
 .. include:: cap1.rst
 
 ****************
 Visão do sistema
 ****************
-
 .. include:: cap2.rst
+
+******************
+Pesquisa e Métodos
+******************
+.. include:: cap3.rst
+
+*********************
+Elaboração da Solução
+*********************
+.. include:: cap4.rst
+
+*********
+Conclusão
+*********
+.. include:: cap5.rst
