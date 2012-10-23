@@ -13,7 +13,9 @@ Modelo Entidade Relacionamento
 
 Notação "Peter Chen"
 ^^^^^^^^^^^^^^^^^^^^
-*TODO*
+.. image:: peter_chen_pi4.jpg
+	:width: 1024px
+	:alt: Notação "Peter Chen"
 
 Notação "Engenharia de Informação(James Martin)"
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
