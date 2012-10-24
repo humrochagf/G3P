@@ -52,7 +52,9 @@ Notação "Peter Chen"
 
 Notação "Engenharia de Informação(James Martin)"
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-*TODO*
+.. image:: eng_inf_pi4.jpg
+	:width: 1024px
+	:alt: Notação "Engenharia de Informação"
 
 Diagrama de Classes
 -------------------
