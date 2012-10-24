@@ -80,7 +80,7 @@ O pagamento é feito referente à dívida acumulada no balanço (mas sem a obrig
 
 - Código que o identifica;
 
-- Data/hora em que o pagamento foi efetuado;
+- Data em que o pagamento foi efetuado;
 
 - Valor;
 
