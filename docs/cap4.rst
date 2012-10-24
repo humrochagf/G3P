@@ -39,7 +39,7 @@ RN_15   A consulta de saldo do mês é a soma de todos os pedidos e pagamentos r
 
 Modelo Conceitual
 =================
-*TODO*
+Abaixo, as modelagens conceituais apresentadas em diferentes formas.
 
 Modelo Entidade Relacionamento
 ------------------------------

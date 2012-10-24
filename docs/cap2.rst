@@ -101,7 +101,7 @@ Um pagamento deve ser vinculado a um e somente um balanço e um balanço pode te
 **Observação Importante:** A visão do gerente do sistema não está inclusa na modelagem pois o framework é quem cuidará da abstração da administração garantindo o foco total na resolução do problema.
 
 Sentença de Posição do Produto
-------------------------------
+==============================
 Este aplicativo pretende atender a esta loja em particular buscando trazer maior organização, segurança e eficiência em seus negócios.
 
 +-----------------+------------------------------+

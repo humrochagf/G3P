@@ -14,8 +14,6 @@ Tendo em vista o modelo de gestão atual da loja foram identificados vários pon
 
 - Não há um registro formal de produtos que a loja fornece.
 
-Com isso foram observados os seguintes problemas:
-
 - Podem haver inconsistências entre o caderno de registros, o quadro de pedidos e os pedidos feitos pelos parceiros devido a erro humano visto que o pedido pode ser alterado ao decorrer do tempo;
 
 - Pode haver dificuldade de interpretação do conteúdo dos pedidos feitos por e-mail;
