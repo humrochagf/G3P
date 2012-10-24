@@ -62,7 +62,55 @@ Diagrama de Classes
 
 Modelo Lógico
 =============
-*TODO*
+CATEGORIA_PRODUTO(*cod_categoria*, nome_categoria)
+
+TIPO_PRODUTO(*cod_tipo*, nome_tipo)
+
+COR_PRODUTO(*cod_cor*, nome_cor)
+
+TEMA_PRODUTO(*cod_tema*, nome_tema)
+
+PRODUTO(*cod_produto*, estoque_produto, preco_produto, cod_categoria, cod_tipo, cod_cor, cod_tema)
+
+	cod_categoria referencia CATEGORIA_PRODUTO
+
+	cod_tipo referencia TIPO_PRODUTO
+
+	cod_cor referencia COR_PRODUTO
+
+	cod_tema referencia TEMA_PRODUTO
+
+COMPOSICAO(*cod_produto, cod_produto*)
+	
+	cod_produto referencia PRODUTO
+
+	cod_produto referencia PRODUTO
+
+PARCEIRO(*cod_parceiro*, email_parceiro, senha_parceiro, nome_parceiro, endereço_parceiro)
+
+TELEFONE(*numero_telefone*, tipo_telefone, cod_parceiro)
+
+	cod_parceiro referencia PARCEIRO
+
+BALANCO(*cod_balanco*, data_balanco, saldo_anterior_balanco, cod_parceiro)
+
+	cod_parceiro referencia PARCEIRO
+
+PEDIDO(*cod_pedido*, status_pedido, data_pedido, data_saida_pedido, data_retorno_pedido, comentarios_pedido, cod_parceiro, cod_balanco)
+
+	cod_parceiro referencia PARCEIRO
+
+	cod_balanco referencia BALANCO
+
+PRODUTO_PEDIDO(*cod_produto, cod_pedido*, quant_produto_pedido)
+
+	cod_produto referencia PRODUTO
+
+	cod_pedido referencia PEDIDO
+
+PAGAMENTO(*cod_pagamento*, data_pagamento, valor_pagamento, banco_pagamento, titular_conta_pagamento, numero_cheque_pagamento, numero_deposito_pagamento, data_deposito_pagamento, cod_balanco)
+
+	cod_balanco referencia BALANCO
 
 Modelo Físico
 =============
