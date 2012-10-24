@@ -48,15 +48,17 @@ Pedido
 
 - Código que o identifica;
 
-- Data de saída;
+- Data em que o pedido foi feito;
 
-- Data de retorno;
+- Data de saída do pedido;
+
+- Data de retorno do pedido em caso de produtos alugados;
 
 - Status que indica se o pedido foi aprovado ou não;
 
 - Comentários.
 
-Todo pedido deve ser feito obrigatoriamente por um e somente um parceiro, mas este parceiro pode fazer diversos pedidos guardando no processo o instante do pedido mantendo seu histórico.
+Todo pedido é feito por apenas um parceiro, mas este parceiro pode fazer diversos pedidos.
 
 Um produto pode estar em vários pedidos e um pedido pode conter vários produtos,  dês de que uma ocorrência de cada produto apareça somente uma vez por pedido guardando sua quantidade.
 
