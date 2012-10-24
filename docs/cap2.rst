@@ -10,7 +10,7 @@ O produtos fornecidos pela loja possuem um série de características onde algum
 
 As características presentes em todo produto são:
 
-- Código para identificar;
+- Código para identifica-lo;
 
 - Preço;
 
@@ -32,7 +32,9 @@ Parceiro
 --------
 É o usuário do sistema e responsável por efetuar os pedidos. Sobre ele guarda-se:
 
-- E-mail do usuário responsável por identificar o parceiro e exercerá a função de login no sistema;
+- Código para identifica-lo;
+
+- E-mail do usuário responsável por exercer a função de login no sistema;
 
 - Nome do parceiro;
 
