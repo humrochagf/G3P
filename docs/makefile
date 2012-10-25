@@ -4,7 +4,7 @@ html:
 	rst2html ${NAME}.rst ${NAME}.html
 
 odt:
-	rst2odt ${NAME}.rst ${NAME}.odt
+	rst2odt --stylesheet=styles.odt ${NAME}.rst ${NAME}.odt
 
 pdf:
 	rst2pdf ${NAME}.rst -o ${NAME}.pdf
