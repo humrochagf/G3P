@@ -1,4 +1,4 @@
-Seram listados neste capítulo as ferramentas utilizadas no desenvolvimento deste trabalho e seu funcionamento além dos requisitos para o deploy do sistema.
+Serão listados neste capítulo as ferramentas utilizadas no desenvolvimento deste trabalho e seu funcionamento além dos requisitos para o deploy do sistema.
 
 Arquitetura do Sistema
 ======================
@@ -20,7 +20,7 @@ As tecnologias utilizadas são:
 
 - brModelo: Aplicativo de modelagem de dados seguindo a notação de "Peter Chen" usado na modelagem conceitual.
 
-- DIA(Diagram Editor): Ferramenta para o desenvolvimento de diagramas estruturados utilizado para a modelagem conceitual de "Engenharia de Informação" escolhido por ser Open Source, multiplataforma e simples de usar.
+- DIA(Diagram Editor): Ferramenta para o desenvolvimento de diagramas estruturados utilizado para a modelagem conceitual de "Engenharia de Informação" e a arquitetura do sistema, escolhido por ser Open Source, multiplataforma e simples de usar.
 
 - Heroku: Plataforma de aplicação na nuvem utilizada para realizar o deployment do projeto para a apresentação, escolhido por sua sinergia com o django.
 
