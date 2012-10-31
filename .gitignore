@@ -1,14 +1,13 @@
-# Python binaries
-*.py[co]
-
-# Vi backup file
+bin
+build
+include
+lib
+local
+man
+share
+Scripts
+.Python
+*.pyc
 *~
-
-# ReST outputs
-*.aux 
-*.html 
-*.odt 
-*.log 
-*.out 
-*.pdf 
-*.tex
+*.db
+.DS_Store
