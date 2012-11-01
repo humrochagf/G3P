@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 
 
@@ -6,6 +7,10 @@ class DinheiroField(models.DecimalField):
         kwargs.setdefault('max_digits', 11)
         kwargs.setdefault('decimal_places', 2)
         return super(DinheiroField, self).__init__(*args, **kwargs)
+
+
+# TODO exclusão lógica de produtos; versionamento de produtos, para que seu
+# preço possa ser alterado sem quebrar o histórico de pedidos;
 
 
 class Produto(models.Model):
