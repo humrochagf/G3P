@@ -52,6 +52,26 @@ class Pedido(models.Model):
     anotacoes = models.TextField(u"Anotações")
 
     produtos = models.ManyToManyField(Produto, related_name='pedidos')
+    # TODO checar referencia
+    descontos = models.ManyToManyField(Desconto, related_name='descontos', null=True)
+
+
+class Desconto(models.Model):
+    # Classe criada para lançamentos de descontos/multas 
+    # o desconto pode ser negativo ou positivo e relativo ou absoluto
+    # sendo aplicado sobre o pedido 
+    # TODO checar se o modelo está correto
+    TIPO_CHOICES = (
+        (0, u"Debito %"),
+        (1, u"Debito R$"),
+        (2, u"Credito %"),
+        (3, u"Credito R$"),
+    )
+
+    tipo = models.SmallPositiverIntegerField(choices=TIPO_CHOICES)
+    valor_relativo = models.PositiveIntegerField(U"Valor %", null=True)
+    valor_absoluto = DinheiroField(u"Valor R$", null=True)
+    justificativa = models.TextField(u"Justificativa do desconto")
 
 
 class Pagamento(models.Model):
