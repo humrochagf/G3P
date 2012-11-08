@@ -24,31 +24,22 @@ class Produto(models.Model):
     # diferente de um produto que "não possui nenhum item em estoque", caso no
     # qual estoque seria igual a zero.
     tipo = models.PositiveSmallIntegerField(choices=TIPO_CHOICES)
-    preco = DinheiroField(u"Preço")
     titulo = models.CharField(u"Titulo", max_length=255)
+    preco = DinheiroField(u"Preço")
     estoque = models.PositiveIntegerField(u"Estoque", null=True)
-
-    composicao = models.ManyToManyField('self')
-
-
-class Cor(models.Model):
-    cor = models.CharField(max_length=255)
+    composicao = models.ManyToManyField('self',
+                                        null=True,
+                                        blank=True,
+                                        limit_choices_to={'tipo': 1})
 
     def __unicode__(self):
-        return self.cor
-
-
-class Tema(models.Model):
-    tema = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return self.tema
+        return self.titulo
 
 
 class Desconto(models.Model):
-    # Classe criada para lançamentos de descontos/multas 
+    # Classe criada para lançamentos de descontos/multas
     # o desconto pode ser negativo ou positivo e relativo ou absoluto
-    # sendo aplicado sobre o pedido 
+    # sendo aplicado sobre o pedido
     # TODO checar se o modelo está correto
     TIPO_CHOICES = (
         (0, u"Debito %"),
@@ -67,11 +58,10 @@ class Pedido(models.Model):
     data_solicitacao = models.DateTimeField(u"Data de solicitação", auto_now_add=True)
     data_saida = models.DateTimeField(u"Data de envio")
     data_retorno = models.DateTimeField(u"Data de retorno", null=True)
-    anotacoes = models.TextField(u"Anotações")
-
-    produtos = models.ManyToManyField(Produto, related_name='pedidos')
+    produtos = models.ManyToManyField('Produto', related_name='pedidos')
     # TODO checar referencia
-    descontos = models.ManyToManyField(Desconto, related_name='descontos', null=True)
+    anotacoes = models.TextField(u"Anotações")
+    descontos = models.ManyToManyField('Desconto', related_name='descontos', null=True)
 
 
 class Pagamento(models.Model):
