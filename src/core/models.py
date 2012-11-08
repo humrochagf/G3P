@@ -58,10 +58,19 @@ class Pedido(models.Model):
     data_solicitacao = models.DateTimeField(u"Data de solicitação", auto_now_add=True)
     data_saida = models.DateTimeField(u"Data de envio")
     data_retorno = models.DateTimeField(u"Data de retorno", null=True)
-    produtos = models.ManyToManyField('Produto', related_name='pedidos')
+    produtos = models.ManyToManyField('Produto', through='RelacaoPedidoProduto', related_name='pedidos')
     # TODO checar referencia
     anotacoes = models.TextField(u"Anotações")
-    descontos = models.ManyToManyField('Desconto', related_name='descontos', null=True)
+    descontos = models.ManyToManyField('Desconto', null=True)
+
+
+class RelacaoPedidoProduto(models.Model):
+    pedido = models.ForeignKey('Pedido')
+    produto = models.ForeignKey('Produto')
+    quantidade = models.PositiveIntegerField(u"Quantidade")
+
+    class Meta:
+        unique_together = ("pedido", "produto")
 
 
 class Pagamento(models.Model):
