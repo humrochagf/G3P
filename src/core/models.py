@@ -26,7 +26,7 @@ class Produto(models.Model):
     tipo = models.PositiveSmallIntegerField(choices=TIPO_CHOICES)
     titulo = models.CharField(u"Titulo", max_length=255)
     preco = DinheiroField(u"Preço")
-    estoque = models.PositiveIntegerField(u"Estoque", null=True)
+    estoque = models.PositiveIntegerField(u"Estoque", null=True, blank=True)
     composicao = models.ManyToManyField('self',
                                         null=True,
                                         blank=True,
