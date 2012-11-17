@@ -20,4 +20,7 @@ class ProdutoAdmin(admin.ModelAdmin):
             return super(ProdutoAdmin, self).save_model(
                 request, obj, form, change)
 
+    def queryset(self, request):
+        return super(ProdutoAdmin, self).queryset(request).active()
+
 admin.site.register(Produto, ProdutoAdmin)
