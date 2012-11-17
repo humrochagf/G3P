@@ -3,8 +3,6 @@ from src.core.models import (
     Produto, Pedido, Desconto, Pagamento, RelacaoPedidoProduto
 )
 
-from src.core.forms import ProdutoInlinePedidoForm
-
 class ProdutoAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'preco')
     search_fields = ('titulo', 'preco')
@@ -23,7 +21,6 @@ class ProdutoAdmin(admin.ModelAdmin):
 
 
 class ProdutoInlinePedido(admin.TabularInline):
-    form = ProdutoInlinePedidoForm
     model = RelacaoPedidoProduto
 
 
