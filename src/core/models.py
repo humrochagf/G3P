@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
 
 
 class DinheiroField(models.DecimalField):
@@ -58,7 +59,7 @@ class Produto(models.Model):
         (2, u"Composto"),
     )
 
-    codigo = models.PositiveIntegerField(default=0, editable=False)
+    codigo = models.PositiveIntegerField(editable=False)
 
     tipo = models.PositiveSmallIntegerField(choices=TIPO_CHOICES)
     titulo = models.CharField(u"Titulo", max_length=255)
@@ -84,6 +85,19 @@ class Produto(models.Model):
 
     def __unicode__(self):
         return self.titulo
+
+    def save(self, *args, **kwargs):
+        if self.codigo is None:
+            # XXX [dirley] isto é um ótimo exemplo de código
+            # irresponsável. isso aqui não se faz. isso é totalmente
+            # vulnerável a erros de concorrência. por favor, alguém dê
+            # um jeito de consertar a coluna codigo e usar algum tipo de
+            # autoincrement atômico lá! valeu!
+            try:
+                self.codigo = Produto.objects.order_by('-codigo').values_list('codigo', flat=True)[0] + 1
+            except IndexError:
+                self.codigo = 0
+        return super(Produto, self).save(*args, **kwargs)
 
     def versioned_save(self):
         fresh = self.__class__.objects.get(pk=self.pk)
@@ -142,15 +156,43 @@ class Desconto(models.Model):
     justificativa = models.TextField(u"Justificativa")
 
 
-class Pagamento(models.Model):
-    tipo = models.ForeignKey('contenttypes.ContentType', editable=False)
+class InheritanceCastModel(models.Model):
+    """
+    Uma classe abstrata que possui uma FK para seu tipo de conteúdo.
+
+    Muito útil para criar um esquema de herança em que se pode fazer
+    casting dos objetos.
+
+    Referência:
+        http://stackoverflow.com/questions/929029/how-do-i-access-the-child-classes-of-an-object-in-django-without-knowing-the-nam/929982#929982
+    """
+    tipo = models.ForeignKey('contenttypes.ContentType', editable=False,
+                             verbose_name=u"Tipo")
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.content_type = self._get_content_type()
+        return super(InheritanceCastModel, self).save(*args, **kwargs)
+
+    def cast(self):
+        return self.content_type.get_object_for_this_type(pk=self.pk)
+
+    def _get_content_type(self):
+        return ContentType.objects.get_for_model(type(self))
+
+
+class Pagamento(InheritanceCastModel):
+    usuario = models.ForeignKey('auth.User', verbose_name=u"Parceiro")
     data = models.DateTimeField(u"Data")
     valor = DinheiroField(u"Valor")
     anotacoes = models.TextField(u"Anotações")
 
+    def __unicode__(self):
+        return u"Pagamento %d" % (self.id,)
 
-# TODO isolar o banco em outra tabela, usar aquele índice da febraban (3
-# caracteres alfanuméricos [+ dígito opcional?])
 
 class PagamentoDebito(Pagamento):
     banco = models.CharField(max_length=255)
@@ -158,8 +200,20 @@ class PagamentoDebito(Pagamento):
     titular_conta = models.CharField(u"Titular da conta", max_length=255)
     data_deposito = models.DateTimeField(u"Data do depósito")
 
+    class Meta:
+        verbose_name = u"Pagamento em débito"
+        verbose_name_plural = u"Pagamentos em débito"
+
 
 class PagamentoCheque(Pagamento):
     banco = models.CharField(max_length=255)
     numero = models.CharField(u"Número do cheque", max_length=255)
     titular_conta = models.CharField(u"Titular da conta", max_length=255)
+
+    class Meta:
+        verbose_name = u"Pagamento com cheque"
+        verbose_name_plural = u"Pagamentos com cheque"
+
+
+# TODO isolar o banco em outra tabela, usar aquele índice da febraban (3
+# caracteres alfanuméricos [+ dígito opcional?])
