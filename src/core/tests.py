@@ -10,8 +10,12 @@ class VersionamentoProdutoTestCase(TestCase):
         # alterar o título do produto não gera uma nova versão
         p1.titulo = u"Teste Alterado"
         p2 = p1.versioned_save()
-
         self.assertEqual((p1.codigo, p1.id), (p2.codigo, p2.id))
+
+        # confirmar que o objeto foi atualizado no banco, e nenhuma nova versão
+        # foi gerada
+        p3 = Produto.objects.latest_version().get(codigo=p1.codigo)
+        self.assertEqual((p1.codigo, p1.id), (p3.codigo, p3.id))
 
         # alterar o preço do produto gera uma nova versão
         p1.preco = 2

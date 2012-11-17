@@ -9,10 +9,6 @@ class DinheiroField(models.DecimalField):
         return super(DinheiroField, self).__init__(*args, **kwargs)
 
 
-# TODO exclusão lógica de produtos; versionamento de produtos, para que seu
-# preço possa ser alterado sem quebrar o histórico de pedidos;
-
-
 class ProdutoQueryMixin(object):
     """
     Métodos comuns aos queryset e managers de produtos.
@@ -115,6 +111,32 @@ class Produto(models.Model):
         return self.__class__.objects.create(**data)
 
 
+class Pedido(models.Model):
+    solicitante = models.ForeignKey('auth.User', related_name='pedidos',
+                                    verbose_name=u"Solicitante")
+    data_solicitacao = models.DateTimeField(u"Data de solicitação", auto_now_add=True)
+    data_saida = models.DateTimeField(u"Data de envio")
+    data_retorno = models.DateTimeField(u"Data de retorno", null=True)
+    anotacoes = models.TextField(u"Anotações", null=True, blank=True)
+
+    produtos = models.ManyToManyField('Produto', through='RelacaoPedidoProduto', related_name='pedidos')
+    descontos = models.ManyToManyField('Desconto', blank=True)
+
+    def __unicode__(self):
+        return u"Pedido %d" % self.id
+
+
+class RelacaoPedidoProduto(models.Model):
+    pedido = models.ForeignKey('Pedido')
+    produto = models.ForeignKey('Produto')
+    quantidade = models.PositiveIntegerField(u"Quantidade")
+
+    class Meta:
+        unique_together = ("pedido", "produto")
+        verbose_name = u"Item de pedido"
+        verbose_name_plural = u"Itens de pedido"
+
+
 class Desconto(models.Model):
     # Classe criada para lançamentos de descontos/multas
     # o desconto pode ser negativo ou positivo e relativo ou absoluto
@@ -131,26 +153,6 @@ class Desconto(models.Model):
     valor_relativo = models.PositiveIntegerField(U"Valor %", null=True)
     valor_absoluto = DinheiroField(u"Valor R$", null=True)
     justificativa = models.TextField(u"Justificativa do desconto")
-
-
-class Pedido(models.Model):
-    data_solicitacao = models.DateTimeField(u"Data de solicitação", auto_now_add=True)
-    data_saida = models.DateTimeField(u"Data de envio")
-    data_retorno = models.DateTimeField(u"Data de retorno", null=True)
-    produtos = models.ManyToManyField('Produto', through='RelacaoPedidoProduto', related_name='pedidos')
-
-    # TODO checar referencia
-    anotacoes = models.TextField(u"Anotações")
-    descontos = models.ManyToManyField('Desconto', null=True)
-
-
-class RelacaoPedidoProduto(models.Model):
-    pedido = models.ForeignKey('Pedido')
-    produto = models.ForeignKey('Produto')
-    quantidade = models.PositiveIntegerField(u"Quantidade")
-
-    class Meta:
-        unique_together = ("pedido", "produto")
 
 
 class Pagamento(models.Model):
