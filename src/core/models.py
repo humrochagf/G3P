@@ -120,7 +120,6 @@ class Pedido(models.Model):
     anotacoes = models.TextField(u"Anotações", null=True, blank=True)
 
     produtos = models.ManyToManyField('Produto', through='RelacaoPedidoProduto', related_name='pedidos')
-    descontos = models.ManyToManyField('Desconto', blank=True)
 
     def __unicode__(self):
         return u"Pedido %d" % self.id
@@ -138,21 +137,9 @@ class RelacaoPedidoProduto(models.Model):
 
 
 class Desconto(models.Model):
-    # Classe criada para lançamentos de descontos/multas
-    # o desconto pode ser negativo ou positivo e relativo ou absoluto
-    # sendo aplicado sobre o pedido
-    # TODO checar se o modelo está correto
-    TIPO_CHOICES = (
-        (0, u"Debito %"),
-        (1, u"Debito R$"),
-        (2, u"Credito %"),
-        (3, u"Credito R$"),
-    )
-
-    tipo = models.PositiveSmallIntegerField(choices=TIPO_CHOICES)
-    valor_relativo = models.PositiveIntegerField(U"Valor %", null=True)
-    valor_absoluto = DinheiroField(u"Valor R$", null=True)
-    justificativa = models.TextField(u"Justificativa do desconto")
+    pedido = models.ForeignKey('Pedido', related_name='descontos')
+    valor = DinheiroField(u"Valor em R$")
+    justificativa = models.TextField(u"Justificativa")
 
 
 class Pagamento(models.Model):

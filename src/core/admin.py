@@ -1,7 +1,8 @@
 from django.contrib import admin
 from src.core.models import (
-    Produto, Pedido, Desconto, Pagamento, RelacaoPedidoProduto
+    Produto, Pedido, Pagamento, Desconto, RelacaoPedidoProduto
 )
+from src.core.forms import DescontoInlinePedidoForm
 
 class ProdutoAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'preco')
@@ -24,6 +25,11 @@ class ProdutoInlinePedido(admin.TabularInline):
     model = RelacaoPedidoProduto
 
 
+class DescontoInlinePedido(admin.TabularInline):
+    model = Desconto
+    form = DescontoInlinePedidoForm
+
+
 class PedidoAdmin(admin.ModelAdmin):
     date_hierarchy = 'data_solicitacao'
     list_display = ('__unicode__', 'solicitante', 'data_solicitacao',
@@ -32,7 +38,7 @@ class PedidoAdmin(admin.ModelAdmin):
                      'solicitante__last_name')
     list_filter = ('data_saida', 'data_retorno')
 
-    inlines = (ProdutoInlinePedido,)
+    inlines = (ProdutoInlinePedido, DescontoInlinePedido)
 
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = super(PedidoAdmin, self).get_readonly_fields(
@@ -46,5 +52,4 @@ class PedidoAdmin(admin.ModelAdmin):
 
 admin.site.register(Produto, ProdutoAdmin)
 admin.site.register(Pedido, PedidoAdmin)
-admin.site.register(Desconto)
 admin.site.register(Pagamento)
