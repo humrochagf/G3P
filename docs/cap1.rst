@@ -6,21 +6,17 @@ O aplicativo será desenvolvido em linguagem de programação Python através do
 
 Motivação
 =========
-Tendo em vista o modelo de gestão atual da loja foram identificados vários pontos críticos os quais motivaram o desenvolvimento deste trabalho sendo eles listados abaixo:
+Tendo em vista o modelo de gestão atual da loja, foram identificados vários pontos críticos os quais motivaram o desenvolvimento deste trabalho sendo eles listados abaixo:
 
 - Os registros de pedidos são feitos de forma manual em quadros de pedidos e em cadernos sendo um caderno para cada parceiro;
 
 - Os pedidos são feitos pelos parceiros por e-mail onde a linguagem do e-mail é informal e varia de acordo com o parceiro (em alguns casos varia de acordo com cada funcionário do parceiro);
 
-- Não há um registro formal de produtos que a loja fornece.
+- Não há um registro formal de produtos que a loja fornece;
 
 - Podem haver inconsistências entre o caderno de registros, o quadro de pedidos e os pedidos feitos pelos parceiros devido a erro humano visto que o pedido pode ser alterado ao decorrer do tempo;
 
 - Pode haver dificuldade de interpretação do conteúdo dos pedidos feitos por e-mail;
-
-- Há muito retrabalho ao alterar um pedido;
-
-- Checar disponibilidade é muito custoso pois deve-se cruzar os dados de todos os pedidos para determinado dia além de observar se determinado produto alugado terá sido devolvido naquela determinada data;
 
 - Não há um histórico confiável de pedidos e pagamentos realizados.
 
@@ -44,8 +40,6 @@ Descreve-se, abaixo, os objetivos específicos a serem alcançados:
 
 - Automatizar a geração de relatórios e consultas sobre os produtos, pedidos e parceiros;
 
-- Controlar da disponibilidade dos produtos;
-
 - Gerar um histórico de pedidos e pagamentos;
 
 - Ter uma interface amigável e de fácil compreensão.
@@ -54,18 +48,18 @@ Organização do Trabalho
 =======================
 Apresenta-se a seguir uma breve descrição de como o trabalho está organizado em 7 capítulos dispostos da seguinte forma:
 
-1. Introdução: breve descrição do problema, motivação e objetivos a serem alcançados com a solução;
+- Capitulo 1 - Introdução: breve descrição do problema, motivação e objetivos a serem alcançados com a solução;
 
-2. Visão do sistema: descrição detalhada do problema e proposição de solução;
+- Capitulo 2 - Visão do sistema: descrição detalhada do problema e proposição de solução;
 
-3. Pesquisa e Métodos: definição das tecnologias utilizadas na solução;
+- Capitulo 3 - Pesquisa e Métodos: definição das tecnologias utilizadas na solução;
 
-4. Elaboração da Solução: descrição detalhada do processo de resolução do problema;
+- Capitulo 4 - Elaboração da Solução: descrição detalhada do processo de resolução do problema;
 
-5. Conclusão;
+- Capitulo 5 - Conclusão;
 
-6. Referências Bibliográficas;
+- Capitulo 6 - Referências Bibliográficas;
 
-7. Apêndice;
+- Capitulo 7 - Apêndice;
 
-8. Anexos.
+- Capitulo 8 - Anexos.
