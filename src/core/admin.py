@@ -8,7 +8,6 @@ class ProdutoAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'preco')
     search_fields = ('titulo', 'preco')
     list_filter = ('tipo',)
-    filter_horizontal = ('composicao',)
 
     def save_model(self, request, obj, form, change):
         if change is True:

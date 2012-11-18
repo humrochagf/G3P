@@ -56,7 +56,6 @@ class Produto(models.Model):
     TIPO_CHOICES = (
         (0, u"Venda"),
         (1, u"Aluguel"),
-        (2, u"Composto"),
     )
 
     codigo = models.PositiveIntegerField(editable=False)
@@ -65,16 +64,7 @@ class Produto(models.Model):
     titulo = models.CharField(u"Titulo", max_length=255)
     preco = DinheiroField(u"Preço")
 
-    # se for NULL, significa que o produto "não possui estoque", o que é
-    # diferente de um produto que "não possui nenhum item em estoque", caso no
-    # qual estoque seria igual a zero.
-    estoque = models.PositiveIntegerField(u"Estoque", null=True, blank=True)
-
     ativo = models.BooleanField(default=True, editable=False)
-
-    composicao = models.ManyToManyField('self', null=True, blank=True,
-                                        limit_choices_to={'tipo': 1},
-                                        related_name='compositor')
 
     VERSIONED_FIELDS = ('tipo', 'preco')
 
