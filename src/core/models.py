@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
+import uuid
 
 
 class DinheiroField(models.DecimalField):
@@ -58,12 +59,15 @@ class Produto(models.Model):
         (1, u"Aluguel"),
     )
 
-    codigo = models.PositiveIntegerField(editable=False)
+    codigo = models.CharField(max_length=32, editable=False)
 
     tipo = models.PositiveSmallIntegerField(choices=TIPO_CHOICES)
     titulo = models.CharField(u"Titulo", max_length=255)
     preco = DinheiroField(u"Preço")
-
+    
+    # Verificar a validade do ativo pois a queryset ja garante pegar a
+    # verção atual sem utiliza-lo, observe que ele em momento algum é setado
+    # como False.
     ativo = models.BooleanField(default=True, editable=False)
 
     VERSIONED_FIELDS = ('tipo', 'preco')
@@ -77,16 +81,8 @@ class Produto(models.Model):
         return self.titulo
 
     def save(self, *args, **kwargs):
-        if self.codigo is None:
-            # XXX [dirley] isto é um ótimo exemplo de código
-            # irresponsável. isso aqui não se faz. isso é totalmente
-            # vulnerável a erros de concorrência. por favor, alguém dê
-            # um jeito de consertar a coluna codigo e usar algum tipo de
-            # autoincrement atômico lá! valeu!
-            try:
-                self.codigo = Produto.objects.order_by('-codigo').values_list('codigo', flat=True)[0] + 1
-            except IndexError:
-                self.codigo = 0
+        if not self.codigo:
+            self.codigo = uuid.uuid1().hex
         return super(Produto, self).save(*args, **kwargs)
 
     def versioned_save(self):
