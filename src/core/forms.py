@@ -33,3 +33,9 @@ class DescontoInlinePedidoForm(forms.ModelForm):
         if commit:
             obj.save()
         return obj
+
+
+class ProdutoInlinePedidoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ProdutoInlinePedidoForm, self).__init__(*args, **kwargs)
+        self.fields['produto'].queryset = self.fields['produto'].queryset.active()

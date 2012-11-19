@@ -2,7 +2,7 @@ from django.contrib import admin
 from src.core.models import (
     Produto, Pedido, Pagamento, Desconto, RelacaoPedidoProduto
 )
-from src.core.forms import DescontoInlinePedidoForm
+from src.core.forms import DescontoInlinePedidoForm, ProdutoInlinePedidoForm
 
 class ProdutoAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'preco')
@@ -22,6 +22,7 @@ class ProdutoAdmin(admin.ModelAdmin):
 
 class ProdutoInlinePedido(admin.TabularInline):
     model = RelacaoPedidoProduto
+    form = ProdutoInlinePedidoForm
 
 
 class DescontoInlinePedido(admin.TabularInline):
