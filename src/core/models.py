@@ -68,7 +68,7 @@ class Produto(models.Model):
     # Verificar a validade do ativo pois a queryset ja garante pegar a
     # verção atual sem utiliza-lo, observe que ele em momento algum é setado
     # como False.
-    ativo = models.BooleanField(default=True, editable=False)
+    ativo = models.BooleanField(default=True, editable=False, unique=True)
 
     VERSIONED_FIELDS = ('tipo', 'preco')
 
