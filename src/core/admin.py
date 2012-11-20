@@ -4,6 +4,7 @@ from src.core.models import (
 )
 from src.core.forms import DescontoInlinePedidoForm, ProdutoInlinePedidoForm
 
+
 class ProdutoAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'preco')
     search_fields = ('titulo', 'preco')
@@ -47,7 +48,6 @@ class PedidoAdmin(admin.ModelAdmin):
             return readonly_fields + ('data_solicitacao',)
         else:
             return readonly_fields
-
 
 
 admin.site.register(Produto, ProdutoAdmin)

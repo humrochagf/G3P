@@ -64,7 +64,7 @@ class Produto(models.Model):
     tipo = models.PositiveSmallIntegerField(choices=TIPO_CHOICES)
     titulo = models.CharField(u"Titulo", max_length=255)
     preco = DinheiroField(u"Preço")
-    
+
     # Verificar a validade do ativo pois a queryset ja garante pegar a
     # verção atual sem utiliza-lo, observe que ele em momento algum é setado
     # como False.
