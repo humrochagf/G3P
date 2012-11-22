@@ -72,7 +72,7 @@ Os pagamentos feitos pelos parceiros são registrados pelo gerente da loja, send
 
 Descontos
 ---------
-Há a nececidade de se dar bonificações ou multas sobre pedidos sendo importante informar:
+Há a necessidade de se dar bonificações ou multas sobre pedidos sendo importante informar:
 
 - Valor do desconto;
 

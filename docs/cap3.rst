@@ -1,8 +1,4 @@
-Serão listados neste capítulo as ferramentas utilizadas no desenvolvimento deste trabalho e seu funcionamento além dos requisitos para o deploy do sistema.
-
-Arquitetura do Sistema
-======================
-*TODO*
+Serão listados neste capítulo as ferramentas utilizadas no desenvolvimento deste trabalho e seu funcionamento além dos requisitos para a instalação do sistema.
 
 Tecnologias de Desenvolvimento
 ==============================
@@ -22,17 +18,18 @@ As tecnologias utilizadas são:
 
 - DIA(Diagram Editor): Ferramenta para o desenvolvimento de diagramas estruturados utilizado para a modelagem conceitual de "Engenharia de Informação" e a arquitetura do sistema, escolhido por ser Open Source, multiplataforma e simples de usar.
 
-- Heroku: Plataforma de aplicação na nuvem utilizada para realizar o deployment do projeto para a apresentação, escolhido por sua sinergia com o django.
-
-- PostgreSQL: Sistema de banco de dados utilizado em produção, escolhido por ser disponibilizado de forma gratuita e pré configurada pelo heroku.
- 
 Requisitos mínimos para instalação
 ==================================
+Serão listados abaixo os requisitos mínimos para a execução da aplicação tanto pelo servidor quanto pelo cliente.
 
 Computador Servidor
 -------------------
-*TODO*
+- Qualquer versão do Python de 2.5.x até 2.7.x;
+- Suporte a banco de dados SQLite 3, MySQL, PostgreSQL ou Oracle;
+- Django versão 1.4.2;
 
 Computador Cliente
 ------------------
-Não usar internet explorer.
+Qualquer computador que possua um navegador preferencialmente atualizado que siga os padrões W3C (World Wide Web Consortium) e conexão com a internet possui condições de operar a aplicação.
+
+No próximo capítulo serão apresentados detalhes do processo de solução do problema detalhado no capítulo 2.

@@ -48,18 +48,14 @@ Organização do Trabalho
 =======================
 Apresenta-se a seguir uma breve descrição de como o trabalho está organizado em 7 capítulos dispostos da seguinte forma:
 
-- Capitulo 1 - Introdução: breve descrição do problema, motivação e objetivos a serem alcançados com a solução;
+- Capítulo 1 - Introdução: breve descrição do problema, motivação e objetivos a serem alcançados com a solução;
 
-- Capitulo 2 - Visão do sistema: descrição detalhada do problema e proposição de solução;
+- Capítulo 2 - Visão do sistema: descrição detalhada do problema e proposição de solução;
 
-- Capitulo 3 - Pesquisa e Métodos: definição das tecnologias utilizadas na solução;
+- Capítulo 3 - Pesquisa e Métodos: definição das tecnologias utilizadas na solução;
 
-- Capitulo 4 - Elaboração da Solução: descrição detalhada do processo de resolução do problema;
+- Capítulo 4 - Elaboração da Solução: descrição detalhada do processo de resolução do problema;
 
-- Capitulo 5 - Conclusão;
+- Capítulo 5 - Conclusão;
 
-- Capitulo 6 - Referências Bibliográficas;
-
-- Capitulo 7 - Apêndice;
-
-- Capitulo 8 - Anexos.
+- Capítulo 6 - Referências Bibliográficas;

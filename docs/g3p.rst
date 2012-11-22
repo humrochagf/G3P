@@ -4,22 +4,31 @@ G3P
 --------------------------------------
 Gestor de Parceiros Produtos e Pedidos
 --------------------------------------
-	Dirley Rodrigues Lima da Silva - 1112130033
-
-	Humberto Rocha Gonçalves Filho - 1112130017
+    
+:Date: 2012-11-22
+:Authors: - Dirley Rodrigues
+          - GitHub: https://github.com/ravishi
+          - Humberto Rocha 
+          - GitHub: https://github.com/humrochagf
 
 **Resumo**
 
-Este trabalho busca a criação de um produto personalizado para uma loja de festas infantis gerenciar seus produtos, parceiros e pedidos. Serão realizados as modelagens conceitual, lógica e física de um banco de dados. Este banco estará ligando a um web framework responsável por gerar a interface com o usuário tendo em mente a simplicidade de uso, a integração do processo de gestão da loja, além de atender a todas particularidades encontradas durante a modelagem do problema.
+Este projeto tem como objetivo principal, a criação de um aplicativo personalizado para uma loja que trabalha com festas infantis e enfrenta alguns problemas de gestão. Para alcançar este objetivo serão aplicados os conceitos de modelagem de dados adicionados à programação orientada a objeto para fazer um produto que oferece integração, simplicidade e atende às necessidades do cliente.
 
-**Palavras-chaves:** produto personalizado, integração , gestão.
+**Palavras-chaves**: aplicativo, gestão, simplicidade.
+
+**Abstract**
+
+This project has as its main goal, the creation of a customized application for a shop that works with children's parties, and faces some management issues. To reach this goal will be applied the concepts of data modeling added to the object oriented programming to make a product which delivers simplicity, integration and attends to the needs of the client.
+
+**Key-words**: application, management, simplicity.
 
 .. contents:: Sumário
-	:depth: 3
-	:local:
+    :depth: 3
+    :local:
 
 .. sectnum::
-	:depth: 3
+    :depth: 3
 
 **********
 Introdução
@@ -45,3 +54,8 @@ Elaboração da Solução
 Conclusão
 *********
 .. include:: cap5.rst
+
+**************************
+Referências Bibliográficas
+**************************
+.. include:: cap6.rst
