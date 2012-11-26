@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
-import uuid
 
 
 class DinheiroField(models.DecimalField):
@@ -59,16 +58,13 @@ class Produto(models.Model):
         (1, u"Aluguel"),
     )
 
-    codigo = models.CharField(max_length=32, editable=False)
+    codigo = models.PositiveIntegerField(editable=False, null=True)
 
     tipo = models.PositiveSmallIntegerField(choices=TIPO_CHOICES)
     titulo = models.CharField(u"Titulo", max_length=255)
     preco = DinheiroField(u"Preço")
 
-    # Verificar a validade do ativo pois a queryset ja garante pegar a
-    # verção atual sem utiliza-lo, observe que ele em momento algum é setado
-    # como False.
-    ativo = models.BooleanField(default=True, editable=False, unique=True)
+    ativo = models.BooleanField(default=True, editable=False)
 
     VERSIONED_FIELDS = ('tipo', 'preco')
 
@@ -79,11 +75,6 @@ class Produto(models.Model):
 
     def __unicode__(self):
         return self.titulo
-
-    def save(self, *args, **kwargs):
-        if not self.codigo:
-            self.codigo = uuid.uuid1().hex
-        return super(Produto, self).save(*args, **kwargs)
 
     def versioned_save(self):
         fresh = self.__class__.objects.get(pk=self.pk)
