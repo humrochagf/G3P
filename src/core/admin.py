@@ -14,8 +14,6 @@ class ProdutoAdmin(admin.ModelAdmin):
         if change is True:
             return obj.versioned_save()
         else:
-            obj.save()
-            obj.codigo = obj.id
             return super(ProdutoAdmin, self).save_model(
                 request, obj, form, change)
 
