@@ -1,8 +1,65 @@
+# -*- coding: utf-8 -*-
+from django.contrib.auth.admin import UserAdmin
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from src.core.models import (
-    Produto, Pedido, Pagamento, Desconto, RelacaoPedidoProduto
+    Produto, Pedido, Pagamento, Desconto, RelacaoPedidoProduto, Parceiro, User
 )
-from src.core.forms import DescontoInlinePedidoForm, ProdutoInlinePedidoForm
+from src.core.forms import DescontoInlinePedidoForm, ProdutoInlinePedidoForm, UserCreationForm
+
+
+class StaffAdmin(UserAdmin):
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Permissions'), {'fields': ('is_active', 'groups', 'user_permissions')}),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'password1', 'password2', 'first_name', 'last_name')}
+        ),
+    )
+    add_form = UserCreationForm
+
+    def queryset(self, request):
+        return super(StaffAdmin, self).queryset(request)\
+                .filter(is_superuser=True)
+
+    def save_model(self, request, obj, form, change):
+        obj.is_superuser = True
+        obj.is_staff = True
+        obj.save()
+
+
+
+class CustomerAdmin(UserAdmin):
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Permissions'), {'fields': ('is_active', 'groups', 'user_permissions')}),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'password1', 'password2', 'first_name', 'last_name')}
+        ),
+    )
+    add_form = UserCreationForm
+
+    def queryset(self, request):
+        return super(CustomerAdmin, self).queryset(request)\
+                .filter(is_superuser=False)
+
+    def save_model(self, request, obj, form, change):
+        obj.is_superuser = False
+        obj.is_staff = True
+
+        # TODO garantir permissões
+
+        obj.save()
 
 
 class ProdutoAdmin(admin.ModelAdmin):
@@ -53,3 +110,7 @@ class PedidoAdmin(admin.ModelAdmin):
 admin.site.register(Produto, ProdutoAdmin)
 admin.site.register(Pedido, PedidoAdmin)
 admin.site.register(Pagamento)
+
+admin.site.unregister(User)
+admin.site.register(User, StaffAdmin)
+admin.site.register(Parceiro, CustomerAdmin)

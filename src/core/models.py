@@ -1,7 +1,16 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 import uuid
+
+
+class Parceiro(User):
+    class Meta:
+        proxy = True
+        app_label = 'auth'
+        verbose_name = u"Parceiro"
+        verbose_name_plural = u"Parceiros"
 
 
 class DinheiroField(models.DecimalField):

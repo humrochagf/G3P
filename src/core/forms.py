@@ -1,6 +1,17 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
+from django.contrib.auth.models import User
 from src.core.models import Desconto
+
+
+class UserCreationForm(BaseUserCreationForm):
+    first_name = forms.CharField(label=u"Nome")
+    last_name = forms.CharField(label=u"Sobrenome")
+
+    class Meta:
+        model = User
+        fields = ("username", "first_name", "last_name")
 
 
 class DescontoInlinePedidoForm(forms.ModelForm):
