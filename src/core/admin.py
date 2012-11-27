@@ -92,9 +92,15 @@ class PedidoAdmin(admin.ModelAdmin):
     list_display = ('solicitante', 'data_solicitacao',
                     'data_saida')
     search_fields = ('id', 'solicitante__first_name')
-    list_filter = ('solicitante', 'data_saida')
+    list_filter = ('data_saida',)
 
     inlines = (ProdutoInlinePedido, DescontoInlinePedido)
+
+    def queryset(self, request):
+        qs = super(PedidoAdmin, self).queryset(request)
+        if not request.user.is_superuser:
+            return qs.filter(solicitante=request.user)
+        return qs
 
     def save_model(self, request, obj, form, change):
         obj.solicitante = request.user
