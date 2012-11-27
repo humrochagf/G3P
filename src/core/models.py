@@ -122,10 +122,10 @@ class Produto(models.Model):
 
 class Pedido(models.Model):
     solicitante = models.ForeignKey('auth.User', related_name='pedidos',
-                                    verbose_name=u"Solicitante")
+                                    verbose_name=u"Solicitante", editable=False)
     data_solicitacao = models.DateTimeField(u"Data de solicitação", auto_now_add=True)
     data_saida = models.DateTimeField(u"Data de envio")
-    data_retorno = models.DateTimeField(u"Data de retorno", null=True)
+    data_retorno = models.DateTimeField(u"Data de retorno", null=True, blank=True)
     anotacoes = models.TextField(u"Anotações", null=True, blank=True)
 
     produtos = models.ManyToManyField('Produto', through='RelacaoPedidoProduto', related_name='pedidos')

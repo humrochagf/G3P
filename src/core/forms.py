@@ -7,7 +7,6 @@ from src.core.models import Desconto
 
 class UserCreationForm(BaseUserCreationForm):
     first_name = forms.CharField(label=u"Nome")
-    last_name = forms.CharField(label=u"Sobrenome")
 
     class Meta:
         model = User

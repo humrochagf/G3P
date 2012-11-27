@@ -33,18 +33,17 @@ class StaffAdmin(UserAdmin):
         obj.save()
 
 
-
 class CustomerAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Personal info'), {'fields': ('first_name', 'email')}),
         (_('Permissions'), {'fields': ('is_active', 'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'first_name', 'last_name')}
+            'fields': ('username', 'password1', 'password2', 'first_name')}
         ),
     )
     add_form = UserCreationForm
@@ -90,13 +89,17 @@ class DescontoInlinePedido(admin.TabularInline):
 
 class PedidoAdmin(admin.ModelAdmin):
     date_hierarchy = 'data_solicitacao'
-    list_display = ('__unicode__', 'solicitante', 'data_solicitacao',
-                    'data_saida', 'data_retorno')
-    search_fields = ('id', 'solicitante__first_name',
-                     'solicitante__last_name')
-    list_filter = ('data_saida', 'data_retorno')
+    list_display = ('solicitante', 'data_solicitacao',
+                    'data_saida')
+    search_fields = ('id', 'solicitante__first_name')
+    list_filter = ('solicitante', 'data_saida')
 
     inlines = (ProdutoInlinePedido, DescontoInlinePedido)
+
+    def save_model(self, request, obj, form, change):
+        obj.solicitante = request.user
+        return super(PedidoAdmin, self).save_model(
+            request, obj, form, change)
 
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = super(PedidoAdmin, self).get_readonly_fields(
