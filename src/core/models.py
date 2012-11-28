@@ -121,8 +121,15 @@ class Produto(models.Model):
 
 
 class Pedido(models.Model):
+    APROVACAO_CHOICES = (
+        (False, u"Não"),
+        (True, u"Sim")
+    )
+
     solicitante = models.ForeignKey('auth.User', related_name='pedidos',
                                     verbose_name=u"Solicitante", editable=False)
+    aprovacao = models.BooleanField(u'Aprovado?', choices=APROVACAO_CHOICES,
+                                    default=False)
     data_solicitacao = models.DateTimeField(u"Data de solicitação", auto_now_add=True)
     data_saida = models.DateTimeField(u"Data de envio")
     data_retorno = models.DateTimeField(u"Data de retorno", null=True, blank=True)

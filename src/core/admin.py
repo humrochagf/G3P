@@ -90,7 +90,9 @@ class DescontoInlinePedido(admin.TabularInline):
 class PedidoAdmin(admin.ModelAdmin):
     date_hierarchy = 'data_solicitacao'
     search_fields = ('id', 'solicitante__first_name')
-    list_filter = ('data_saida',)
+    list_display = ['solicitante', 'data_solicitacao',
+                    'data_saida', 'data_retorno', 'aprovacao']
+    list_filter = ('aprovacao', 'data_saida')
 
     inlines = (ProdutoInlinePedido, DescontoInlinePedido)
 
@@ -101,28 +103,24 @@ class PedidoAdmin(admin.ModelAdmin):
         return qs
 
     def save_model(self, request, obj, form, change):
-        obj.solicitante = request.user
+        if not change:
+            obj.solicitante = request.user
         return super(PedidoAdmin, self).save_model(
             request, obj, form, change)
 
-    def get_list_display(self, request):
-        list_display = ['solicitante', 'data_solicitacao',
-                    'data_saida']
-        if request.user.is_superuser:
-            list_display.append('data_retorno')
-        return list_display
-
     def get_form(self, request, obj=None, **kwargs):
+        self.exclude = []
         if not request.user.is_superuser:
-            self.exclude = ['data_retorno', ]
+            self.exclude += ['data_retorno', 'aprovacao']
         return super(PedidoAdmin, self).get_form(request, obj, **kwargs)
 
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = super(PedidoAdmin, self).get_readonly_fields(
                                                             request, obj)
         if obj is not None:
-            readonly_fields += ('data_solicitacao',)
-        return readonly_fields
+            return readonly_fields + ('data_solicitacao',)
+        else:
+            return readonly_fields
 
 
 admin.site.register(Produto, ProdutoAdmin)
