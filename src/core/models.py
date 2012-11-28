@@ -94,7 +94,10 @@ class Produto(models.Model):
         unique_together = (('codigo', 'id'),)
 
     def __unicode__(self):
-        return self.titulo
+        r = self.titulo
+        if not self.ativo or Produto.objects.filter(codigo=self.codigo, pk__gt=self.pk).exists():
+            r += u' [Inativo]'
+        return r
 
     def save(self, *args, **kwargs):
         if not self.codigo:
