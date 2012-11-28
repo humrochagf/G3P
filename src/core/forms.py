@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.db.models import Q
 from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
 from django.contrib.auth.models import User
 from src.core.models import Desconto
@@ -48,4 +49,9 @@ class DescontoInlinePedidoForm(forms.ModelForm):
 class ProdutoInlinePedidoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProdutoInlinePedidoForm, self).__init__(*args, **kwargs)
-        self.fields['produto'].queryset = self.fields['produto'].queryset.active()
+        qs = self.fields['produto'].queryset.active()
+        instance = kwargs.get('instance')
+        if instance is not None:
+            pks = qs.values_list('pk', flat=True)
+            qs = qs.model.objects.filter(Q(pk=instance.pk) | Q(pk__in=pks))
+        self.fields['produto'].queryset = qs

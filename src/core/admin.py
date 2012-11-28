@@ -3,7 +3,14 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from src.core.models import (
-    Produto, Pedido, Pagamento, Desconto, RelacaoPedidoProduto, Parceiro, User
+    Produto,
+    Pedido,
+    Pagamento,
+    Desconto,
+    RelacaoPedidoProduto,
+    Parceiro,
+    User,
+    get_user_balance
 )
 from src.core.forms import DescontoInlinePedidoForm, ProdutoInlinePedidoForm, UserCreationForm
 
@@ -34,6 +41,8 @@ class StaffAdmin(UserAdmin):
 
 
 class CustomerAdmin(UserAdmin):
+    list_filter = ('is_active',)
+    list_display = ('first_name', 'username', 'email')
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'email')}),
@@ -59,6 +68,11 @@ class CustomerAdmin(UserAdmin):
         # TODO garantir permissões
 
         obj.save()
+
+        obj.user_permissions.add()
+
+    #def balanco_mensal(self, obj):
+    #    return - get_user_balance(obj)
 
 
 class ProdutoAdmin(admin.ModelAdmin):
