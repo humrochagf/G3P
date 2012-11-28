@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
+import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-import uuid
+
+
+def get_user_balance(user, until=None):
+    orders = user.pedidos.filter()
+    if until is not None:
+        orders = orders.filter(data_solicitacao__lt=until)
+    return sum(pedido.get_value() for pedido in orders)
 
 
 class Parceiro(User):
@@ -139,6 +146,16 @@ class Pedido(models.Model):
 
     def __unicode__(self):
         return u"Pedido %s" % self.id
+
+    def get_value(self):
+        values = self.relacaopedidoproduto_set.values_list(
+                            'produto__preco', 'quantidade')
+        values = (val * quant for (val, quant) in values)
+
+        # considerar os descontos
+        discounts = self.descontos.values_list('valor', flat=True)
+
+        return sum(values) - sum(discounts)
 
 
 class RelacaoPedidoProduto(models.Model):

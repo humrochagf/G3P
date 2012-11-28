@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
+from decimal import Decimal
+from datetime import datetime
 from django.test import TestCase
-from src.core.models import Produto
+from django.contrib.auth.models import User
+from src.core.models import (
+    Produto,
+    Pedido,
+    RelacaoPedidoProduto,
+    get_user_balance,
+)
 
 
 class VersionamentoProdutoTestCase(TestCase):
@@ -27,3 +35,36 @@ class VersionamentoProdutoTestCase(TestCase):
         active = Produto.objects.active()
         self.assertEqual(active.count(), 1)
         self.assertEqual(active[0].id, p1v2.id)
+
+
+class BalanceTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user('username', 'user@test.test', 'password')
+
+    def test_order_value(self):
+        p1 = Produto.objects.create(titulo=u"Teste", preco=10, tipo=0)
+        p2 = Produto.objects.create(titulo=u"Teste 2", preco=20, tipo=1)
+
+        o1 = Pedido.objects.create(solicitante=self.user, data_saida=datetime.now())
+        RelacaoPedidoProduto.objects.create(pedido=o1, produto=p1, quantidade=3)
+        RelacaoPedidoProduto.objects.create(pedido=o1, produto=p2, quantidade=2)
+
+        self.assertIn(p1, o1.produtos.all())
+        self.assertIn(p2, o1.produtos.all())
+
+        self.assertEqual(o1.get_value(), 70)
+
+        d1 = o1.descontos.create(valor=Decimal('3.34'), justificativa='so pra zoar')
+
+        self.assertEqual(o1.get_value(), Decimal('66.66'))
+
+        d2 = o1.descontos.create(valor=Decimal('-22.22'), justificativa='pq eu posso')
+
+        self.assertEqual(o1.get_value(), Decimal('88.88'))
+
+        self.assertEqual(get_user_balance(self.user), Decimal('88.88'))
+
+        o2 = Pedido.objects.create(solicitante=self.user, data_saida=datetime.now())
+        RelacaoPedidoProduto.objects.create(pedido=o2, produto=p2, quantidade=1)
+
+        self.assertEqual(get_user_balance(self.user), Decimal('108.88'))
