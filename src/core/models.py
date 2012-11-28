@@ -8,7 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 def get_user_balance(user, until=None):
     orders = user.pedidos.filter()
     if until is not None:
-        orders = orders.filter(data_solicitacao__lt=until)
+        orders = orders.filter(data_solicitacao__lte=until)
     return sum(pedido.get_value() for pedido in orders)
 
 

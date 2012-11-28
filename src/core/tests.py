@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from decimal import Decimal
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.test import TestCase
 from django.contrib.auth.models import User
 from src.core.models import (
@@ -68,3 +68,9 @@ class BalanceTestCase(TestCase):
         RelacaoPedidoProduto.objects.create(pedido=o2, produto=p2, quantidade=1)
 
         self.assertEqual(get_user_balance(self.user), Decimal('108.88'))
+
+        # e por ultimo, testamos se o argumento de data funciona
+        # corretamente
+        yesterday = datetime.now() - timedelta(days=1)
+        Pedido.objects.filter(pk=o1.pk).update(data_solicitacao=yesterday)
+        self.assertEqual(get_user_balance(self.user, until=yesterday), Decimal('88.88'))
