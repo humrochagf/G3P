@@ -81,6 +81,18 @@ class ProdutoInlinePedido(admin.TabularInline):
     model = RelacaoPedidoProduto
     form = ProdutoInlinePedidoForm
 
+    def get_readonly_fields(self, request, obj=None):
+        readonly_fields = super(ProdutoInlinePedido, self).get_readonly_fields(request, obj)
+        if obj is not None:
+            readonly_fields += ('preco_un', 'preco')
+        return readonly_fields
+
+    def preco_un(self, obj):
+        return obj.produto.preco
+
+    def preco(self, obj):
+        return obj.produto.preco * obj.quantidade
+
 
 class DescontoInlinePedido(admin.TabularInline):
     model = Desconto
