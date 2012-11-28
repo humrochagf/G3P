@@ -138,7 +138,7 @@ class Pedido(models.Model):
     produtos = models.ManyToManyField('Produto', through='RelacaoPedidoProduto', related_name='pedidos')
 
     def __unicode__(self):
-        return u"Pedido %d" % self.id
+        return u"Pedido %s" % self.id
 
 
 class RelacaoPedidoProduto(models.Model):
@@ -193,7 +193,7 @@ class Pagamento(InheritanceCastModel):
     anotacoes = models.TextField(u"Anotações")
 
     def __unicode__(self):
-        return u"Pagamento %d" % (self.id,)
+        return u"Pagamento %s" % (self.id,)
 
 
 class PagamentoDebito(Pagamento):

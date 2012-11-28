@@ -117,6 +117,12 @@ class PedidoAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = super(PedidoAdmin, self).get_readonly_fields(
                                                             request, obj)
+
+        readonly_fields += ('solicitante',)
+
+        if not request.user.is_superuser:
+            readonly_fields += ('data_retorno', 'aprovado')
+
         if obj is not None:
             return readonly_fields + ('data_solicitacao',)
         else:
